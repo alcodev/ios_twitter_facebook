@@ -1,0 +1,580 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		52797C8B14C6B39800D1F08E /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 52797C8A14C6B39800D1F08E /* libxml2.dylib */; };
+		5279CAE614C4743B00814786 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279CAE514C4743B00814786 /* UIKit.framework */; };
+		5279CAE814C4743B00814786 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279CAE714C4743B00814786 /* Foundation.framework */; };
+		5279CAEA14C4743B00814786 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279CAE914C4743B00814786 /* CoreGraphics.framework */; };
+		5279CAF014C4743B00814786 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5279CAEE14C4743B00814786 /* InfoPlist.strings */; };
+		5279CAF214C4743B00814786 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CAF114C4743B00814786 /* main.m */; };
+		5279CAF614C4743B00814786 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CAF514C4743B00814786 /* AppDelegate.m */; };
+		5279CAF914C4743B00814786 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CAF814C4743B00814786 /* ViewController.m */; };
+		5279CAFC14C4743B00814786 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5279CAFA14C4743B00814786 /* ViewController_iPhone.xib */; };
+		5279CAFF14C4743B00814786 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5279CAFD14C4743B00814786 /* ViewController_iPad.xib */; };
+		5279CB0714C4743B00814786 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279CB0614C4743B00814786 /* SenTestingKit.framework */; };
+		5279CB0814C4743B00814786 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279CAE514C4743B00814786 /* UIKit.framework */; };
+		5279CB0914C4743B00814786 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279CAE714C4743B00814786 /* Foundation.framework */; };
+		5279CB1114C4743B00814786 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5279CB0F14C4743B00814786 /* InfoPlist.strings */; };
+		5279CB1414C4743B00814786 /* FacebookAuthenticationSandboxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1314C4743B00814786 /* FacebookAuthenticationSandboxTests.m */; };
+		5279CB1C14C4743B0081478B /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B0081478A /* Facebook.m */; };
+		5279CB1C14C4743B00814797 /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B00814796 /* FBDialog.m */; };
+		5279CB1C14C4743B0081479A /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B00814799 /* FBLoginDialog.m */; };
+		5279CB1C14C4743B0081479D /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B0081479C /* FBRequest.m */; };
+		5279CB1C14C4743B008147A2 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B008147A1 /* NSObject+SBJSON.m */; };
+		5279CB1C14C4743B008147A5 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B008147A4 /* NSString+SBJSON.m */; };
+		5279CB1C14C4743B008147A8 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B008147A7 /* SBJSON.m */; };
+		5279CB1C14C4743B008147AB /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B008147AA /* SBJsonBase.m */; };
+		5279CB1C14C4743B008147AE /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B008147AD /* SBJsonParser.m */; };
+		5279CB1C14C4743B008147B1 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B008147B0 /* SBJsonWriter.m */; };
+		5279CB1C14C4743B008147B4 /* FacebookFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B008147B3 /* FacebookFacade.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5279CB0A14C4743B00814786 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5279CAD814C4743A00814786 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5279CAE014C4743A00814786;
+			remoteInfo = FacebookAuthenticationSandbox;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		52797C8A14C6B39800D1F08E /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		5279CAE114C4743A00814786 /* FacebookAuthenticationSandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FacebookAuthenticationSandbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5279CAE514C4743B00814786 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5279CAE714C4743B00814786 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5279CAE914C4743B00814786 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5279CAED14C4743B00814786 /* FacebookAuthenticationSandbox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FacebookAuthenticationSandbox-Info.plist"; sourceTree = "<group>"; };
+		5279CAEF14C4743B00814786 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5279CAF114C4743B00814786 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5279CAF314C4743B00814786 /* FacebookAuthenticationSandbox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FacebookAuthenticationSandbox-Prefix.pch"; sourceTree = "<group>"; };
+		5279CAF414C4743B00814786 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5279CAF514C4743B00814786 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5279CAF714C4743B00814786 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		5279CAF814C4743B00814786 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		5279CAFB14C4743B00814786 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		5279CAFE14C4743B00814786 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		5279CB0514C4743B00814786 /* FacebookAuthenticationSandboxTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookAuthenticationSandboxTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5279CB0614C4743B00814786 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		5279CB0E14C4743B00814786 /* FacebookAuthenticationSandboxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FacebookAuthenticationSandboxTests-Info.plist"; sourceTree = "<group>"; };
+		5279CB1014C4743B00814786 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5279CB1214C4743B00814786 /* FacebookAuthenticationSandboxTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FacebookAuthenticationSandboxTests.h; sourceTree = "<group>"; };
+		5279CB1314C4743B00814786 /* FacebookAuthenticationSandboxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FacebookAuthenticationSandboxTests.m; sourceTree = "<group>"; };
+		5279CB1C14C4743B00814789 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
+		5279CB1C14C4743B0081478A /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
+		5279CB1C14C4743B0081478C /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
+		5279CB1C14C4743B00814795 /* FBDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBDialog.h; sourceTree = "<group>"; };
+		5279CB1C14C4743B00814796 /* FBDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBDialog.m; sourceTree = "<group>"; };
+		5279CB1C14C4743B00814798 /* FBLoginDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginDialog.h; sourceTree = "<group>"; };
+		5279CB1C14C4743B00814799 /* FBLoginDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginDialog.m; sourceTree = "<group>"; };
+		5279CB1C14C4743B0081479B /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
+		5279CB1C14C4743B0081479C /* FBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRequest.m; sourceTree = "<group>"; };
+		5279CB1C14C4743B0081479F /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		5279CB1C14C4743B008147A0 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		5279CB1C14C4743B008147A1 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		5279CB1C14C4743B008147A3 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		5279CB1C14C4743B008147A4 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		5279CB1C14C4743B008147A6 /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		5279CB1C14C4743B008147A7 /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
+		5279CB1C14C4743B008147A9 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		5279CB1C14C4743B008147AA /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		5279CB1C14C4743B008147AC /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		5279CB1C14C4743B008147AD /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		5279CB1C14C4743B008147AF /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		5279CB1C14C4743B008147B0 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		5279CB1C14C4743B008147B3 /* FacebookFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookFacade.m; sourceTree = "<group>"; };
+		5279CB1C14C4743B008147B5 /* FacebookFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookFacade.h; sourceTree = "<group>"; };
+		5279CB1C14C4743B008147B6 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5279CADE14C4743A00814786 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52797C8B14C6B39800D1F08E /* libxml2.dylib in Frameworks */,
+				5279CAE614C4743B00814786 /* UIKit.framework in Frameworks */,
+				5279CAE814C4743B00814786 /* Foundation.framework in Frameworks */,
+				5279CAEA14C4743B00814786 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5279CB0114C4743B00814786 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5279CB0714C4743B00814786 /* SenTestingKit.framework in Frameworks */,
+				5279CB0814C4743B00814786 /* UIKit.framework in Frameworks */,
+				5279CB0914C4743B00814786 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5279CAD614C4743A00814786 = {
+			isa = PBXGroup;
+			children = (
+				52797C8A14C6B39800D1F08E /* libxml2.dylib */,
+				5279CAEB14C4743B00814786 /* FacebookAuthenticationSandbox */,
+				5279CB0C14C4743B00814786 /* FacebookAuthenticationSandboxTests */,
+				5279CAE414C4743A00814786 /* Frameworks */,
+				5279CAE214C4743A00814786 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5279CAE214C4743A00814786 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5279CAE114C4743A00814786 /* FacebookAuthenticationSandbox.app */,
+				5279CB0514C4743B00814786 /* FacebookAuthenticationSandboxTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5279CAE414C4743A00814786 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5279CAE514C4743B00814786 /* UIKit.framework */,
+				5279CAE714C4743B00814786 /* Foundation.framework */,
+				5279CAE914C4743B00814786 /* CoreGraphics.framework */,
+				5279CB0614C4743B00814786 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5279CAEB14C4743B00814786 /* FacebookAuthenticationSandbox */ = {
+			isa = PBXGroup;
+			children = (
+				5279CB1C14C4743B008147B6 /* Consts.h */,
+				5279CAF414C4743B00814786 /* AppDelegate.h */,
+				5279CAF514C4743B00814786 /* AppDelegate.m */,
+				5279CAF714C4743B00814786 /* ViewController.h */,
+				5279CAF814C4743B00814786 /* ViewController.m */,
+				5279CAFA14C4743B00814786 /* ViewController_iPhone.xib */,
+				5279CAFD14C4743B00814786 /* ViewController_iPad.xib */,
+				5279CAEC14C4743B00814786 /* Supporting Files */,
+				5279CB1C14C4743B00814787 /* Lib */,
+				5279CB1C14C4743B008147B2 /* FacebookFacade */,
+			);
+			path = FacebookAuthenticationSandbox;
+			sourceTree = "<group>";
+		};
+		5279CAEC14C4743B00814786 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5279CAED14C4743B00814786 /* FacebookAuthenticationSandbox-Info.plist */,
+				5279CAEE14C4743B00814786 /* InfoPlist.strings */,
+				5279CAF114C4743B00814786 /* main.m */,
+				5279CAF314C4743B00814786 /* FacebookAuthenticationSandbox-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5279CB0C14C4743B00814786 /* FacebookAuthenticationSandboxTests */ = {
+			isa = PBXGroup;
+			children = (
+				5279CB1214C4743B00814786 /* FacebookAuthenticationSandboxTests.h */,
+				5279CB1314C4743B00814786 /* FacebookAuthenticationSandboxTests.m */,
+				5279CB0D14C4743B00814786 /* Supporting Files */,
+			);
+			path = FacebookAuthenticationSandboxTests;
+			sourceTree = "<group>";
+		};
+		5279CB0D14C4743B00814786 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5279CB0E14C4743B00814786 /* FacebookAuthenticationSandboxTests-Info.plist */,
+				5279CB0F14C4743B00814786 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5279CB1C14C4743B00814787 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				5279CB1C14C4743B00814788 /* FacebookSdk */,
+				5279CB1C14C4743B008147B7 /* Twitter */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		5279CB1C14C4743B00814788 /* FacebookSdk */ = {
+			isa = PBXGroup;
+			children = (
+				5279CB1C14C4743B0081479C /* FBRequest.m */,
+				5279CB1C14C4743B0081479B /* FBRequest.h */,
+				5279CB1C14C4743B00814799 /* FBLoginDialog.m */,
+				5279CB1C14C4743B00814798 /* FBLoginDialog.h */,
+				5279CB1C14C4743B00814796 /* FBDialog.m */,
+				5279CB1C14C4743B00814795 /* FBDialog.h */,
+				5279CB1C14C4743B0081478C /* FBConnect.h */,
+				5279CB1C14C4743B0081478A /* Facebook.m */,
+				5279CB1C14C4743B00814789 /* Facebook.h */,
+				5279CB1C14C4743B0081479E /* JSON */,
+			);
+			path = FacebookSdk;
+			sourceTree = "<group>";
+		};
+		5279CB1C14C4743B0081479E /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				5279CB1C14C4743B008147B0 /* SBJsonWriter.m */,
+				5279CB1C14C4743B008147AF /* SBJsonWriter.h */,
+				5279CB1C14C4743B008147AD /* SBJsonParser.m */,
+				5279CB1C14C4743B008147AC /* SBJsonParser.h */,
+				5279CB1C14C4743B008147AA /* SBJsonBase.m */,
+				5279CB1C14C4743B008147A9 /* SBJsonBase.h */,
+				5279CB1C14C4743B008147A7 /* SBJSON.m */,
+				5279CB1C14C4743B008147A6 /* SBJSON.h */,
+				5279CB1C14C4743B008147A4 /* NSString+SBJSON.m */,
+				5279CB1C14C4743B008147A3 /* NSString+SBJSON.h */,
+				5279CB1C14C4743B008147A1 /* NSObject+SBJSON.m */,
+				5279CB1C14C4743B008147A0 /* NSObject+SBJSON.h */,
+				5279CB1C14C4743B0081479F /* JSON.h */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		5279CB1C14C4743B008147B2 /* FacebookFacade */ = {
+			isa = PBXGroup;
+			children = (
+				5279CB1C14C4743B008147B5 /* FacebookFacade.h */,
+				5279CB1C14C4743B008147B3 /* FacebookFacade.m */,
+			);
+			path = FacebookFacade;
+			sourceTree = "<group>";
+		};
+		5279CB1C14C4743B008147B7 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Twitter;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5279CAE014C4743A00814786 /* FacebookAuthenticationSandbox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5279CB1714C4743B00814786 /* Build configuration list for PBXNativeTarget "FacebookAuthenticationSandbox" */;
+			buildPhases = (
+				5279CADD14C4743A00814786 /* Sources */,
+				5279CADE14C4743A00814786 /* Frameworks */,
+				5279CADF14C4743A00814786 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FacebookAuthenticationSandbox;
+			productName = FacebookAuthenticationSandbox;
+			productReference = 5279CAE114C4743A00814786 /* FacebookAuthenticationSandbox.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5279CB0414C4743B00814786 /* FacebookAuthenticationSandboxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5279CB1A14C4743B00814786 /* Build configuration list for PBXNativeTarget "FacebookAuthenticationSandboxTests" */;
+			buildPhases = (
+				5279CB0014C4743B00814786 /* Sources */,
+				5279CB0114C4743B00814786 /* Frameworks */,
+				5279CB0214C4743B00814786 /* Resources */,
+				5279CB0314C4743B00814786 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5279CB0B14C4743B00814786 /* PBXTargetDependency */,
+			);
+			name = FacebookAuthenticationSandboxTests;
+			productName = FacebookAuthenticationSandboxTests;
+			productReference = 5279CB0514C4743B00814786 /* FacebookAuthenticationSandboxTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5279CAD814C4743A00814786 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 5279CADB14C4743A00814786 /* Build configuration list for PBXProject "FacebookAuthenticationSandbox" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5279CAD614C4743A00814786;
+			productRefGroup = 5279CAE214C4743A00814786 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5279CAE014C4743A00814786 /* FacebookAuthenticationSandbox */,
+				5279CB0414C4743B00814786 /* FacebookAuthenticationSandboxTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5279CADF14C4743A00814786 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5279CAF014C4743B00814786 /* InfoPlist.strings in Resources */,
+				5279CAFC14C4743B00814786 /* ViewController_iPhone.xib in Resources */,
+				5279CAFF14C4743B00814786 /* ViewController_iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5279CB0214C4743B00814786 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5279CB1114C4743B00814786 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5279CB0314C4743B00814786 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5279CADD14C4743A00814786 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5279CAF214C4743B00814786 /* main.m in Sources */,
+				5279CAF614C4743B00814786 /* AppDelegate.m in Sources */,
+				5279CAF914C4743B00814786 /* ViewController.m in Sources */,
+				5279CB1C14C4743B0081478B /* Facebook.m in Sources */,
+				5279CB1C14C4743B00814797 /* FBDialog.m in Sources */,
+				5279CB1C14C4743B0081479A /* FBLoginDialog.m in Sources */,
+				5279CB1C14C4743B0081479D /* FBRequest.m in Sources */,
+				5279CB1C14C4743B008147A2 /* NSObject+SBJSON.m in Sources */,
+				5279CB1C14C4743B008147A5 /* NSString+SBJSON.m in Sources */,
+				5279CB1C14C4743B008147A8 /* SBJSON.m in Sources */,
+				5279CB1C14C4743B008147AB /* SBJsonBase.m in Sources */,
+				5279CB1C14C4743B008147AE /* SBJsonParser.m in Sources */,
+				5279CB1C14C4743B008147B1 /* SBJsonWriter.m in Sources */,
+				5279CB1C14C4743B008147B4 /* FacebookFacade.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5279CB0014C4743B00814786 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5279CB1414C4743B00814786 /* FacebookAuthenticationSandboxTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5279CB0B14C4743B00814786 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5279CAE014C4743A00814786 /* FacebookAuthenticationSandbox */;
+			targetProxy = 5279CB0A14C4743B00814786 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5279CAEE14C4743B00814786 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5279CAEF14C4743B00814786 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5279CAFA14C4743B00814786 /* ViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5279CAFB14C4743B00814786 /* en */,
+			);
+			name = ViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		5279CAFD14C4743B00814786 /* ViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5279CAFE14C4743B00814786 /* en */,
+			);
+			name = ViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+		5279CB0F14C4743B00814786 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5279CB1014C4743B00814786 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5279CB1514C4743B00814786 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5279CB1614C4743B00814786 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5279CB1814C4743B00814786 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FacebookAuthenticationSandbox/FacebookAuthenticationSandbox-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "FacebookAuthenticationSandbox/FacebookAuthenticationSandbox-Info.plist";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "<Multiple";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5279CB1914C4743B00814786 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FacebookAuthenticationSandbox/FacebookAuthenticationSandbox-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "FacebookAuthenticationSandbox/FacebookAuthenticationSandbox-Info.plist";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "<Multiple";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		5279CB1B14C4743B00814786 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FacebookAuthenticationSandbox.app/FacebookAuthenticationSandbox";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FacebookAuthenticationSandbox/FacebookAuthenticationSandbox-Prefix.pch";
+				INFOPLIST_FILE = "FacebookAuthenticationSandboxTests/FacebookAuthenticationSandboxTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		5279CB1C14C4743B00814786 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FacebookAuthenticationSandbox.app/FacebookAuthenticationSandbox";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FacebookAuthenticationSandbox/FacebookAuthenticationSandbox-Prefix.pch";
+				INFOPLIST_FILE = "FacebookAuthenticationSandboxTests/FacebookAuthenticationSandboxTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5279CADB14C4743A00814786 /* Build configuration list for PBXProject "FacebookAuthenticationSandbox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5279CB1514C4743B00814786 /* Debug */,
+				5279CB1614C4743B00814786 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5279CB1714C4743B00814786 /* Build configuration list for PBXNativeTarget "FacebookAuthenticationSandbox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5279CB1814C4743B00814786 /* Debug */,
+				5279CB1914C4743B00814786 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5279CB1A14C4743B00814786 /* Build configuration list for PBXNativeTarget "FacebookAuthenticationSandboxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5279CB1B14C4743B00814786 /* Debug */,
+				5279CB1C14C4743B00814786 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5279CAD814C4743A00814786 /* Project object */;
+}
