@@ -49,7 +49,7 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Login</string>
+						<string key="IBUINormalTitle">Facebook Login</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="578648102">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -85,7 +85,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">information text</string>
+						<string key="IBUIText">facebook information text</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -117,7 +117,7 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Logout</string>
+						<string key="IBUINormalTitle">Facebook Logout</string>
 						<reference key="IBUIHighlightedTitleColor" ref="578648102"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -156,45 +156,45 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">loginButton</string>
+						<string key="label">facebookLoginButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="678173581"/>
 					</object>
-					<int key="connectionID">13</int>
+					<int key="connectionID">20</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">notificationTextLabel</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="356561171"/>
-					</object>
-					<int key="connectionID">16</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">logoutButton</string>
+						<string key="label">facebookLogoutButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="758896125"/>
 					</object>
-					<int key="connectionID">18</int>
+					<int key="connectionID">21</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">facebookNotificationTextLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="356561171"/>
+					</object>
+					<int key="connectionID">22</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">loginButtonClicked:</string>
+						<string key="label">facebookLoginButtonClicked:</string>
 						<reference key="source" ref="678173581"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">1</int>
 					</object>
-					<int key="connectionID">14</int>
+					<int key="connectionID">23</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">logoutButtonClicked:</string>
+						<string key="label">facebookLogoutButtonClicked:</string>
 						<reference key="source" ref="758896125"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">1</int>
 					</object>
-					<int key="connectionID">19</int>
+					<int key="connectionID">24</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -257,7 +257,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">19</int>
+			<int key="maxID">24</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -265,35 +265,35 @@
 					<string key="className">ViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="loginButtonClicked:">id</string>
-						<string key="logoutButtonClicked:">id</string>
+						<string key="facebookLoginButtonClicked:">id</string>
+						<string key="facebookLogoutButtonClicked:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="loginButtonClicked:">
-							<string key="name">loginButtonClicked:</string>
+						<object class="IBActionInfo" key="facebookLoginButtonClicked:">
+							<string key="name">facebookLoginButtonClicked:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="logoutButtonClicked:">
-							<string key="name">logoutButtonClicked:</string>
+						<object class="IBActionInfo" key="facebookLogoutButtonClicked:">
+							<string key="name">facebookLogoutButtonClicked:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="loginButton">UIButton</string>
-						<string key="logoutButton">UIButton</string>
-						<string key="notificationTextLabel">UILabel</string>
+						<string key="facebookLoginButton">UIButton</string>
+						<string key="facebookLogoutButton">UIButton</string>
+						<string key="facebookNotificationTextLabel">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="loginButton">
-							<string key="name">loginButton</string>
+						<object class="IBToOneOutletInfo" key="facebookLoginButton">
+							<string key="name">facebookLoginButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="logoutButton">
-							<string key="name">logoutButton</string>
+						<object class="IBToOneOutletInfo" key="facebookLogoutButton">
+							<string key="name">facebookLogoutButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="notificationTextLabel">
-							<string key="name">notificationTextLabel</string>
+						<object class="IBToOneOutletInfo" key="facebookNotificationTextLabel">
+							<string key="name">facebookNotificationTextLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 					</dictionary>

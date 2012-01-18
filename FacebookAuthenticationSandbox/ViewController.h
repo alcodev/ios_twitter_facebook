@@ -13,14 +13,14 @@
 
 @interface ViewController : UIViewController<FBSessionDelegate, FBRequestDelegate> {
 
-    IBOutlet UILabel *notificationTextLabel;
-    IBOutlet UIButton *loginButton;
-    IBOutlet UIButton *logoutButton;
+    IBOutlet UILabel *facebookNotificationTextLabel;
+    IBOutlet UIButton *facebookLoginButton;
+    IBOutlet UIButton *facebookLogoutButton;
 }
 @property(nonatomic, readonly)FacebookFacade *facebookFacade;
 
-- (IBAction)loginButtonClicked:(id)sender;
-- (IBAction)logoutButtonClicked:(id)sender;
+- (IBAction)facebookLoginButtonClicked:(id)sender;
+- (IBAction)facebookLogoutButtonClicked:(id)sender;
 
 
 /**

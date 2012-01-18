@@ -25,9 +25,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [notificationTextLabel setText:@""];
+    [facebookNotificationTextLabel setText:@""];
 //    [loginButton setEnabled:NO];
-    [logoutButton setEnabled:NO];
+    [facebookLogoutButton setEnabled:NO];
 }
 
 - (void)viewDidUnload {
@@ -78,20 +78,20 @@
 
 - (void)dealloc {
     [_facebookFacade release];
-    [notificationTextLabel release];
-    [loginButton release];
-    [logoutButton release];
+    [facebookNotificationTextLabel release];
+    [facebookLoginButton release];
+    [facebookLogoutButton release];
     [super dealloc];
 }
 
-- (IBAction)loginButtonClicked:(id)sender {
-    [loginButton setEnabled:NO];
-    [logoutButton setEnabled:NO];
+- (IBAction)facebookLoginButtonClicked:(id)sender {
+    [facebookLoginButton setEnabled:NO];
+    [facebookLogoutButton setEnabled:NO];
     FacebookFacade *facebookFacade = [self getFacebookFacade];
     [facebookFacade login];
 }
 
-- (IBAction)logoutButtonClicked:(id)sender {
+- (IBAction)facebookLogoutButtonClicked:(id)sender {
     [[self getFacebookFacade] logout];
 }
 
@@ -104,15 +104,15 @@
     [defaults setObject:[[facebookFacade facebook] expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
     [[facebookFacade facebook] requestWithGraphPath:@"me" andDelegate:self];
-    [loginButton setEnabled:NO];
-    [logoutButton setEnabled:YES];
+    [facebookLoginButton setEnabled:NO];
+    [facebookLogoutButton setEnabled:YES];
 }
 
 - (void)fbDidNotLogin:(BOOL)cancelled {
     LOG(@"User did NOT login");
-    [notificationTextLabel setText:@"Invalid user or password"];
-    [loginButton setEnabled:YES];
-    [logoutButton setEnabled:NO];
+    [facebookNotificationTextLabel setText:@"Invalid user or password"];
+    [facebookLoginButton setEnabled:YES];
+    [facebookLogoutButton setEnabled:NO];
 }
 
 - (void)fbDidLogout {
@@ -121,16 +121,16 @@
     [defaults removeObjectForKey:@"FBExpirationDateKey"];
     [defaults synchronize];
     LOG(@"User did logout");
-    [notificationTextLabel setText:@""];
-    [loginButton setEnabled:YES];
-    [logoutButton setEnabled:NO];
+    [facebookNotificationTextLabel setText:@""];
+    [facebookLoginButton setEnabled:YES];
+    [facebookLogoutButton setEnabled:NO];
 }
 
 - (void)fbSessionInvalidated {
     LOG(@"Session invalidated");
-    [notificationTextLabel setText:@"Session invalidated"];
-    [loginButton setEnabled:YES];
-    [logoutButton setEnabled:NO];
+    [facebookNotificationTextLabel setText:@"Session invalidated"];
+    [facebookLoginButton setEnabled:YES];
+    [facebookLogoutButton setEnabled:NO];
 }
 
 - (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
@@ -145,7 +145,7 @@
     }
     if ([result isKindOfClass:[NSDictionary class]]) {
         id userName = [result objectForKey:@"name"];LOG(@"Name: %@", userName);
-        [notificationTextLabel setText:userName];
+        [facebookNotificationTextLabel setText:userName];
     }
     LOG(@"request returns %@", result);
 
