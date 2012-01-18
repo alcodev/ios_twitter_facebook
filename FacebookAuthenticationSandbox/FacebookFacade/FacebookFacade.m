@@ -6,7 +6,6 @@
 
 #import "FacebookFacade.h"
 #import "Facebook.h"
-#import "AppDelegate.h"
 
 
 @implementation FacebookFacade {
