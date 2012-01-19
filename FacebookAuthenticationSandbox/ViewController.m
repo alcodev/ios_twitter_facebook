@@ -9,9 +9,11 @@
 #import "ViewController.h"
 #import "FacebookFacade.h"
 #import "Consts.h"
+#import "TwitterFacade.h"
 
 @implementation ViewController {
     FacebookFacade *_facebookFacade;
+    TwitterFacade *_twitterFacade;
 }
 
 @synthesize facebookFacade = _facebookFacade;
@@ -26,6 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [facebookNotificationTextLabel setText:@""];
+    [twitterNotificationTextLabel setText:@""];
 //    [loginButton setEnabled:NO];
     [facebookLogoutButton setEnabled:NO];
 }
@@ -81,6 +84,7 @@
     [facebookNotificationTextLabel release];
     [facebookLoginButton release];
     [facebookLogoutButton release];
+    [_twitterFacade release];
     [super dealloc];
 }
 
@@ -93,6 +97,21 @@
 
 - (IBAction)facebookLogoutButtonClicked:(id)sender {
     [[self getFacebookFacade] logout];
+}
+
+- (TwitterFacade *)getTwitterFacade {
+    if (!_twitterFacade) {
+        _twitterFacade = [[TwitterFacade alloc] initWithTwitterEngineDelegate:self];
+    }
+    return (_twitterFacade);
+}
+
+- (IBAction)twitterLoginButtonClicked:(id)sender {
+    [[self getTwitterFacade] login];
+}
+
+- (IBAction)twitterLogoutButtonClicked:(id)sender {
+    [[self getTwitterFacade] logout];
 }
 
 
@@ -139,15 +158,41 @@
 }
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
-    NSLog(@"Inside didLoad");
     if ([result isKindOfClass:[NSArray class]]) {
         result = [result objectAtIndex:0];
     }
     if ([result isKindOfClass:[NSDictionary class]]) {
-        id userName = [result objectForKey:@"name"];LOG(@"Name: %@", userName);
+        id userName = [result objectForKey:@"name"];LOG(@"Facebook Name: %@", userName);
         [facebookNotificationTextLabel setText:userName];
     }
-    LOG(@"request returns %@", result);
+}
 
+- (void)requestSucceeded:(NSString *)connectionIdentifier {
+    LOG(@"Request Succeeded: %@", connectionIdentifier);
+
+}
+
+- (void)requestFailed:(NSString *)connectionIdentifier withError:(NSError *)error {
+    LOG(@"Request Failed: %@", error);
+}
+
+- (void)userInfoReceived:(NSArray *)userInfo forRequest:(NSString *)connectionIdentifier {
+    id userName = [[userInfo objectAtIndex:0] objectForKey:@"name"];LOG(@"Twitter Name: %@", userName);
+    [twitterNotificationTextLabel setText:userName];
 };
+
+#pragma mark SA_OAuthTwitterControllerDelegate
+- (void)OAuthTwitterController:(SA_OAuthTwitterController *)controller authenticatedWithUsername:(NSString *)username {
+    NSLog(@"Authenicated for %@", username);
+    [[self getTwitterFacade] getUserInformationFor:username];
+}
+
+- (void)OAuthTwitterControllerFailed:(SA_OAuthTwitterController *)controller {
+    NSLog(@"Authentication Failed!");
+}
+
+- (void)OAuthTwitterControllerCanceled:(SA_OAuthTwitterController *)controller {
+    NSLog(@"Authentication Canceled.");
+}
+
 @end
