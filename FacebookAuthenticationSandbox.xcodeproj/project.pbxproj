@@ -70,6 +70,8 @@
 		5279CB1C14C4743B00814835 /* OAServiceTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B00814834 /* OAServiceTicket.m */; };
 		5279CB1C14C4743B00814839 /* OAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B00814838 /* OAToken.m */; };
 		5279CB1C14C4743B00814840 /* TwitterFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B0081483F /* TwitterFacade.m */; };
+		5279CB1C14C4743B00814843 /* TwitterControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B00814842 /* TwitterControllerDelegate.m */; };
+		5279CB1C14C4743B00814846 /* DefaultsKeys.h in Resources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B00814845 /* DefaultsKeys.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,6 +221,9 @@
 		5279CB1C14C4743B0081483D /* OAuthConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthConsumer.h; sourceTree = "<group>"; };
 		5279CB1C14C4743B0081483F /* TwitterFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFacade.m; sourceTree = "<group>"; };
 		5279CB1C14C4743B00814841 /* TwitterFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterFacade.h; sourceTree = "<group>"; };
+		5279CB1C14C4743B00814842 /* TwitterControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterControllerDelegate.m; sourceTree = "<group>"; };
+		5279CB1C14C4743B00814844 /* TwitterControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterControllerDelegate.h; sourceTree = "<group>"; };
+		5279CB1C14C4743B00814845 /* DefaultsKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefaultsKeys.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +287,7 @@
 		5279CAEB14C4743B00814786 /* FacebookAuthenticationSandbox */ = {
 			isa = PBXGroup;
 			children = (
+				5279CB1C14C4743B00814845 /* DefaultsKeys.h */,
 				5279CB1C14C4743B008147B6 /* Consts.h */,
 				5279CAF414C4743B00814786 /* AppDelegate.h */,
 				5279CAF514C4743B00814786 /* AppDelegate.m */,
@@ -535,6 +541,8 @@
 		5279CB1C14C4743B0081483E /* TwitterFacade */ = {
 			isa = PBXGroup;
 			children = (
+				5279CB1C14C4743B00814844 /* TwitterControllerDelegate.h */,
+				5279CB1C14C4743B00814842 /* TwitterControllerDelegate.m */,
 				5279CB1C14C4743B00814841 /* TwitterFacade.h */,
 				5279CB1C14C4743B0081483F /* TwitterFacade.m */,
 			);
@@ -618,6 +626,7 @@
 				5279CB1C14C4743B008147BD /* jQueryInjectLandscape.txt in Resources */,
 				5279CB1C14C4743B008147BF /* libOAuth.a in Resources */,
 				5279CB1C14C4743B00814807 /* twitter_load.png in Resources */,
+				5279CB1C14C4743B00814846 /* DefaultsKeys.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,6 +707,7 @@
 				5279CB1C14C4743B00814835 /* OAServiceTicket.m in Sources */,
 				5279CB1C14C4743B00814839 /* OAToken.m in Sources */,
 				5279CB1C14C4743B00814840 /* TwitterFacade.m in Sources */,
+				5279CB1C14C4743B00814843 /* TwitterControllerDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

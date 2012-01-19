@@ -7,14 +7,17 @@
 #import <Foundation/Foundation.h>
 
 @protocol MGTwitterEngineDelegate;
+@protocol SA_OAuthTwitterControllerDelegate;
+@class ViewController;
 
 
 @interface TwitterFacade : NSObject
-- (id)initWithTwitterEngineDelegate:(NSObject <MGTwitterEngineDelegate> *)delegate;
+- (id)initWithViewController:(ViewController *)viewController;
 
 - (void)login;
 
+- (void)restore;
+
 - (void)logout;
 
-- (void)getUserInformationFor:(NSString *)string;
 @end

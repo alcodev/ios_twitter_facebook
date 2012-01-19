@@ -8,38 +8,48 @@
 #import "SA_OAuthTwitterEngine.h"
 #import "SA_OAuthTwitterController.h"
 #import "Consts.h"
+#import "ViewController.h"
+#import "TwitterControllerDelegate.h"
+#import "DefaultsKeys.h"
 
 
 @implementation TwitterFacade {
     SA_OAuthTwitterEngine *_engine;
-    id <SA_OAuthTwitterControllerDelegate> _twitterEngineDelegate;
+    ViewController *_controller;
+    TwitterControllerDelegate *_delegate;
 }
-- (id)initWithTwitterEngineDelegate:(NSObject <MGTwitterEngineDelegate> *)delegate {
+- (id)initWithViewController:(ViewController *)viewController {
     self = [super init];
     if (self) {
-        _twitterEngineDelegate = [delegate retain];
+        _controller = [viewController retain];
+        _delegate = [[TwitterControllerDelegate alloc] initWithController:viewController];
     }
 
     return self;
-//To change the template use AppCode | Preferences | File Templates.
 }
 
 - (void)dealloc {
     [_engine release];
-    [_twitterEngineDelegate release];
+    [_delegate release];
+    [_controller release];
     [super dealloc];
 }
 
-- (void)login {
-    if (_engine) return;
-    _engine = [[SA_OAuthTwitterEngine alloc] initOAuthWithDelegate:_twitterEngineDelegate];
+- (void)createEngine {
+    _engine = [[SA_OAuthTwitterEngine alloc] initOAuthWithDelegate:_delegate];
     _engine.consumerKey = TWITTER_APP_CONSUMER_KEY;
     _engine.consumerSecret = TWITTER_APP_CONSUMER_SECRET;
+}
 
-    UIViewController *controller = [SA_OAuthTwitterController controllerToEnterCredentialsWithTwitterEngine:_engine delegate:_twitterEngineDelegate];
+- (void)login {
+    [self createEngine];
+    if ([_engine isAuthorized]) {
+        return;
+    }
+    UIViewController *controller = [SA_OAuthTwitterController controllerToEnterCredentialsWithTwitterEngine:_engine delegate:_delegate];
 
     if (controller)
-        [_twitterEngineDelegate presentModalViewController:controller animated:YES];
+        [_controller presentModalViewController:controller animated:YES];
     else {
         [_engine sendUpdate:[NSString stringWithFormat:@"Already Updated. %@", [NSDate date]]];
     }
@@ -47,13 +57,27 @@
 
 }
 
+- (void)restore {
+    if (_engine) {
+        return;
+    }
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    id username = [defaults objectForKey:TWITTER_USERNAME];
+    [self createEngine];
+    if ([_engine isAuthorized]) {
+        [_engine getUserInformationFor:username];
+    }
+}
+
 - (void)logout {
-   [_engine ]
-
+    [_engine clearAccessToken];
+    [_engine endUserSession];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:TWITTER_AUTH_TOKEN];
+    [defaults removeObjectForKey:TWITTER_USERNAME];
+    [defaults synchronize];
+    [_engine release];
+    [_controller logoutFinished];
 }
 
-- (void)getUserInformationFor:(NSString *)username {
-   [_engine getUserInformationFor:username];
-
-}
 @end

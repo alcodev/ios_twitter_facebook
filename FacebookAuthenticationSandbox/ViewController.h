@@ -64,5 +64,12 @@
 
 - (void)userInfoReceived:(NSArray *)userInfo forRequest:(NSString *)connectionIdentifier;
 
+- (void)logoutFinished;
 
+
+- (void)showTwitterUsername:(NSString *)username;
+
+- (void)showTwitterAuthenticationFailed;
+
+- (void)showTwitterAuthenticationCanceled;
 @end

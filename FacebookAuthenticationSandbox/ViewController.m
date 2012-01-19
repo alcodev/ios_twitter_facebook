@@ -46,6 +46,13 @@
     return (_facebookFacade);
 }
 
+- (TwitterFacade *)getTwitterFacade {
+    if (!_twitterFacade) {
+        _twitterFacade = [[TwitterFacade alloc] initWithViewController:self];
+    }
+    return (_twitterFacade);
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [super viewWillAppear:animated];
@@ -55,6 +62,8 @@
         [[self getFacebookFacade] facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
     }
     [[self getFacebookFacade] restoreSession];
+
+    [[self getTwitterFacade] restore];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -99,12 +108,6 @@
     [[self getFacebookFacade] logout];
 }
 
-- (TwitterFacade *)getTwitterFacade {
-    if (!_twitterFacade) {
-        _twitterFacade = [[TwitterFacade alloc] initWithTwitterEngineDelegate:self];
-    }
-    return (_twitterFacade);
-}
 
 - (IBAction)twitterLoginButtonClicked:(id)sender {
     [[self getTwitterFacade] login];
@@ -162,37 +165,27 @@
         result = [result objectAtIndex:0];
     }
     if ([result isKindOfClass:[NSDictionary class]]) {
-        id userName = [result objectForKey:@"name"];LOG(@"Facebook Name: %@", userName);
+        id userName = [result objectForKey:@"name"];
+        LOG(@"Facebook Name: %@", userName);
         [facebookNotificationTextLabel setText:userName];
     }
 }
 
-- (void)requestSucceeded:(NSString *)connectionIdentifier {
-    LOG(@"Request Succeeded: %@", connectionIdentifier);
 
+
+- (void)logoutFinished {
+    [twitterNotificationTextLabel setText:@""];
 }
 
-- (void)requestFailed:(NSString *)connectionIdentifier withError:(NSError *)error {
-    LOG(@"Request Failed: %@", error);
+- (void)showTwitterUsername:(NSString *)username {
+   [twitterNotificationTextLabel setText:username];
 }
 
-- (void)userInfoReceived:(NSArray *)userInfo forRequest:(NSString *)connectionIdentifier {
-    id userName = [[userInfo objectAtIndex:0] objectForKey:@"name"];LOG(@"Twitter Name: %@", userName);
-    [twitterNotificationTextLabel setText:userName];
-};
-
-#pragma mark SA_OAuthTwitterControllerDelegate
-- (void)OAuthTwitterController:(SA_OAuthTwitterController *)controller authenticatedWithUsername:(NSString *)username {
-    NSLog(@"Authenicated for %@", username);
-    [[self getTwitterFacade] getUserInformationFor:username];
+- (void)showTwitterAuthenticationFailed {
+    [twitterNotificationTextLabel setText:@"Twitter authentication failed"];
 }
 
-- (void)OAuthTwitterControllerFailed:(SA_OAuthTwitterController *)controller {
-    NSLog(@"Authentication Failed!");
+- (void)showTwitterAuthenticationCanceled {
+    [twitterNotificationTextLabel setText:@"Twitter authentication canceled"];
 }
-
-- (void)OAuthTwitterControllerCanceled:(SA_OAuthTwitterController *)controller {
-    NSLog(@"Authentication Canceled.");
-}
-
 @end
