@@ -77,7 +77,7 @@
     [defaults removeObjectForKey:TWITTER_USERNAME];
     [defaults synchronize];
     [_engine release];
-    [_controller logoutFinished];
+    [_controller twitterLogoutFinished];
 }
 
 @end

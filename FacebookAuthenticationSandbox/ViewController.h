@@ -13,7 +13,7 @@
 
 @class FacebookFacade;
 
-@interface ViewController : UIViewController<FBSessionDelegate, FBRequestDelegate, SA_OAuthTwitterControllerDelegate> {
+@interface ViewController : UIViewController {
 
     IBOutlet UILabel *facebookNotificationTextLabel;
     IBOutlet UIButton *facebookLoginButton;
@@ -32,44 +32,21 @@
 - (IBAction)twitterLogoutButtonClicked:(id)sender;
 
 
-/**
- * Called when the user successfully logged in.
- */
-- (void)fbDidLogin;
-
-/**
- * Called when the user dismissed the dialog without logging in.
- */
-- (void)fbDidNotLogin:(BOOL)cancelled;
-
-/**
- * Called when the user logged out.
- */
-- (void)fbDidLogout;
-
-/**
- * Called when the current session has expired. This might happen when:
- *  - the access token expired
- *  - the app has been disabled
- *  - the user revoked the app's permissions
- *  - the user changed his or her password
- */
-- (void)fbSessionInvalidated;
-
-
-
-- (void)requestSucceeded:(NSString *)connectionIdentifier;
-
-- (void)requestFailed:(NSString *)connectionIdentifier withError:(NSError *)error;
-
-- (void)userInfoReceived:(NSArray *)userInfo forRequest:(NSString *)connectionIdentifier;
-
-- (void)logoutFinished;
-
+- (void)twitterLogoutFinished;
 
 - (void)showTwitterUsername:(NSString *)username;
 
 - (void)showTwitterAuthenticationFailed;
 
 - (void)showTwitterAuthenticationCanceled;
+
+- (void)onFacebookLoginSuccess;
+
+- (void)onFacebookLoginFailed;
+
+- (void)onFacebookLogout;
+
+- (void)onFacebookSessionInvalidated;
+
+- (void)showFacebookUsername:(NSString *)username;
 @end

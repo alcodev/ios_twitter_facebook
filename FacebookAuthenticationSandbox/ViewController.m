@@ -10,10 +10,13 @@
 #import "FacebookFacade.h"
 #import "Consts.h"
 #import "TwitterFacade.h"
+#import "DefaultsKeys.h"
+#import "FacebookControllerDelegate.h"
 
 @implementation ViewController {
     FacebookFacade *_facebookFacade;
     TwitterFacade *_twitterFacade;
+    FacebookControllerDelegate *_facebookControllerDelegate;
 }
 
 @synthesize facebookFacade = _facebookFacade;
@@ -41,7 +44,8 @@
 
 - (FacebookFacade *)getFacebookFacade {
     if (!_facebookFacade) {
-        _facebookFacade = [[FacebookFacade alloc] initWithAppId:FACEBOOK_APP_ID andDelegate:self];
+        _facebookControllerDelegate = [[FacebookControllerDelegate alloc] initWithController:self];
+        _facebookFacade = [[FacebookFacade alloc] initWithAppId:FACEBOOK_APP_ID andDelegate:_facebookControllerDelegate];
     }
     return (_facebookFacade);
 }
@@ -56,10 +60,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [super viewWillAppear:animated];
-    if ([defaults objectForKey:@"FBAccessTokenKey"]
-            && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        [[self getFacebookFacade] facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        [[self getFacebookFacade] facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    if ([defaults objectForKey:FACEBOOK_AUTH_TOKEN]
+            && [defaults objectForKey:FACEBOOK_EXPIRATION_DATE_KEY]) {
+        [[self getFacebookFacade] facebook].accessToken = [defaults objectForKey:FACEBOOK_AUTH_TOKEN];
+        [[self getFacebookFacade] facebook].expirationDate = [defaults objectForKey:FACEBOOK_EXPIRATION_DATE_KEY];
     }
     [[self getFacebookFacade] restoreSession];
 
@@ -79,7 +83,6 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
     } else {
@@ -94,12 +97,15 @@
     [facebookLoginButton release];
     [facebookLogoutButton release];
     [_twitterFacade release];
+    [_facebookControllerDelegate release];
     [super dealloc];
 }
 
 - (IBAction)facebookLoginButtonClicked:(id)sender {
     [facebookLoginButton setEnabled:NO];
     [facebookLogoutButton setEnabled:NO];
+    [twitterLoginButton setEnabled:NO];
+    [twitterLogoutButton setEnabled:NO];
     FacebookFacade *facebookFacade = [self getFacebookFacade];
     [facebookFacade login];
 }
@@ -117,75 +123,66 @@
     [[self getTwitterFacade] logout];
 }
 
+- (void)twitterLogoutFinished {
+    [twitterNotificationTextLabel setText:@""];
+    [twitterLoginButton setEnabled:YES];
+    [twitterLogoutButton setEnabled:NO];
+}
 
-- (void)fbDidLogin {
-    LOG(@"User did login");
+- (void)showTwitterUsername:(NSString *)username {
+    [twitterNotificationTextLabel setText:username];
+    [twitterLoginButton setEnabled:NO];
+    [twitterLogoutButton setEnabled:YES];
+}
+
+- (void)showTwitterAuthenticationFailed {
+    [twitterNotificationTextLabel setText:@"Twitter authentication failed"];
+    [twitterLoginButton setEnabled:YES];
+    [twitterLogoutButton setEnabled:NO];
+}
+
+- (void)showTwitterAuthenticationCanceled {
+    [twitterNotificationTextLabel setText:@"Twitter authentication canceled"];
+    [twitterLoginButton setEnabled:YES];
+    [twitterLogoutButton setEnabled:NO];
+}
+
+- (void)onFacebookLoginSuccess {
     FacebookFacade *facebookFacade = [self getFacebookFacade];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[[facebookFacade facebook] accessToken] forKey:@"FBAccessTokenKey"];
-    [defaults setObject:[[facebookFacade facebook] expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults setObject:[[facebookFacade facebook] accessToken] forKey:FACEBOOK_AUTH_TOKEN];
+    [defaults setObject:[[facebookFacade facebook] expirationDate] forKey:FACEBOOK_EXPIRATION_DATE_KEY];
     [defaults synchronize];
-    [[facebookFacade facebook] requestWithGraphPath:@"me" andDelegate:self];
+    [[facebookFacade facebook] requestWithGraphPath:@"me" andDelegate:_facebookControllerDelegate];
     [facebookLoginButton setEnabled:NO];
     [facebookLogoutButton setEnabled:YES];
 }
 
-- (void)fbDidNotLogin:(BOOL)cancelled {
-    LOG(@"User did NOT login");
+- (void)onFacebookLoginFailed {
     [facebookNotificationTextLabel setText:@"Invalid user or password"];
     [facebookLoginButton setEnabled:YES];
     [facebookLogoutButton setEnabled:NO];
 }
 
-- (void)fbDidLogout {
+- (void)onFacebookLogout {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:@"FBAccessTokenKey"];
-    [defaults removeObjectForKey:@"FBExpirationDateKey"];
+    [defaults removeObjectForKey:FACEBOOK_AUTH_TOKEN];
+    [defaults removeObjectForKey:FACEBOOK_EXPIRATION_DATE_KEY];
     [defaults synchronize];
     LOG(@"User did logout");
     [facebookNotificationTextLabel setText:@""];
     [facebookLoginButton setEnabled:YES];
     [facebookLogoutButton setEnabled:NO];
+
 }
 
-- (void)fbSessionInvalidated {
-    LOG(@"Session invalidated");
+- (void)onFacebookSessionInvalidated {
     [facebookNotificationTextLabel setText:@"Session invalidated"];
     [facebookLoginButton setEnabled:YES];
     [facebookLogoutButton setEnabled:NO];
 }
 
-- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
-    LOG(@"Inside didReceiveResponse: received response");
-    LOG(@"URL @", [response URL]);
-}
-
-- (void)request:(FBRequest *)request didLoad:(id)result {
-    if ([result isKindOfClass:[NSArray class]]) {
-        result = [result objectAtIndex:0];
-    }
-    if ([result isKindOfClass:[NSDictionary class]]) {
-        id userName = [result objectForKey:@"name"];
-        LOG(@"Facebook Name: %@", userName);
-        [facebookNotificationTextLabel setText:userName];
-    }
-}
-
-
-
-- (void)logoutFinished {
-    [twitterNotificationTextLabel setText:@""];
-}
-
-- (void)showTwitterUsername:(NSString *)username {
-   [twitterNotificationTextLabel setText:username];
-}
-
-- (void)showTwitterAuthenticationFailed {
-    [twitterNotificationTextLabel setText:@"Twitter authentication failed"];
-}
-
-- (void)showTwitterAuthenticationCanceled {
-    [twitterNotificationTextLabel setText:@"Twitter authentication canceled"];
+- (void)showFacebookUsername:(NSString *)username {
+    [facebookNotificationTextLabel setText:username];
 }
 @end

@@ -72,6 +72,7 @@
 		5279CB1C14C4743B00814840 /* TwitterFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B0081483F /* TwitterFacade.m */; };
 		5279CB1C14C4743B00814843 /* TwitterControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B00814842 /* TwitterControllerDelegate.m */; };
 		5279CB1C14C4743B00814846 /* DefaultsKeys.h in Resources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B00814845 /* DefaultsKeys.h */; };
+		5279CB1C14C4743B00814848 /* FacebookControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B00814847 /* FacebookControllerDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -224,6 +225,8 @@
 		5279CB1C14C4743B00814842 /* TwitterControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterControllerDelegate.m; sourceTree = "<group>"; };
 		5279CB1C14C4743B00814844 /* TwitterControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterControllerDelegate.h; sourceTree = "<group>"; };
 		5279CB1C14C4743B00814845 /* DefaultsKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefaultsKeys.h; sourceTree = "<group>"; };
+		5279CB1C14C4743B00814847 /* FacebookControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookControllerDelegate.m; sourceTree = "<group>"; };
+		5279CB1C14C4743B00814849 /* FacebookControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookControllerDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -382,6 +385,8 @@
 		5279CB1C14C4743B008147B2 /* FacebookFacade */ = {
 			isa = PBXGroup;
 			children = (
+				5279CB1C14C4743B00814849 /* FacebookControllerDelegate.h */,
+				5279CB1C14C4743B00814847 /* FacebookControllerDelegate.m */,
 				5279CB1C14C4743B008147B5 /* FacebookFacade.h */,
 				5279CB1C14C4743B008147B3 /* FacebookFacade.m */,
 			);
@@ -708,6 +713,7 @@
 				5279CB1C14C4743B00814839 /* OAToken.m in Sources */,
 				5279CB1C14C4743B00814840 /* TwitterFacade.m in Sources */,
 				5279CB1C14C4743B00814843 /* TwitterControllerDelegate.m in Sources */,
+				5279CB1C14C4743B00814848 /* FacebookControllerDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
