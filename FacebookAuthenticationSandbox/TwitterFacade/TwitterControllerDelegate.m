@@ -7,21 +7,40 @@
 #import "TwitterControllerDelegate.h"
 #import "ViewController.h"
 #import "SA_OAuthTwitterEngine.h"
-#import "DefaultsKeys.h"
 
+#define TWITTER_AUTH_TOKEN      @"twitterAuthenticationToken"
+#define TWITTER_USERNAME        @"twitterUsername"
 
 @implementation TwitterControllerDelegate {
     ViewController *_viewController;
 }
+
+- (TwitterControllerDelegate *)initWithController:(ViewController *)controller {
+    self = [super init];
+    if (self){
+        _viewController = [controller retain];
+    }
+
+    return (self);
+}
+
+- (void)dealloc {
+    [_viewController release];
+    [super dealloc];
+}
+
+//called by MGTwitterEngine
 - (void)requestSucceeded:(NSString *)connectionIdentifier {
     LOG(@"Twitter Request Succeeded: %@", connectionIdentifier);
 
 }
 
+//called by MGTwitterEngine
 - (void)requestFailed:(NSString *)connectionIdentifier withError:(NSError *)error {
     LOG(@"Twitter Request Failed: %@", error);
 }
 
+//called by MGTwitterEngine
 - (void)userInfoReceived:(NSArray *)userInfo forRequest:(NSString *)connectionIdentifier {
     id userName = [[userInfo objectAtIndex:0] objectForKey:@"name"];
     LOG(@"Twitter Name: %@", userName);
@@ -44,6 +63,7 @@
     [_viewController showTwitterAuthenticationCanceled];
 }
 
+//called by SA_OAuthTwitterEngine
 - (void)storeCachedTwitterOAuthData:(NSString *)data forUsername:(NSString *)username {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:data forKey:TWITTER_AUTH_TOKEN];
@@ -51,20 +71,9 @@
     [defaults synchronize];
 }
 
+//called by SA_OAuthTwitterEngine
 - (NSString *)cachedTwitterOAuthDataForUsername:(NSString *)username {
     return [[NSUserDefaults standardUserDefaults] objectForKey:TWITTER_AUTH_TOKEN];
 }
 
-- (TwitterControllerDelegate *)initWithController:(ViewController *)controller {
-    self = [super init];
-    if (self){
-        _viewController = [controller retain];
-    }
-    return (self);
-}
-
-- (void)dealloc {
-    [_viewController release];
-    [super dealloc];
-}
 @end
