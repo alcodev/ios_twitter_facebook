@@ -6,10 +6,6 @@
 
 #import "TwitterFacade.h"
 #import "SA_OAuthTwitterEngine.h"
-#import "SA_OAuthTwitterController.h"
-#import "Consts.h"
-#import "ViewController.h"
-#import "TwitterControllerDelegate.h"
 
 #define TWITTER_AUTH_TOKEN      @"twitterAuthenticationToken"
 #define TWITTER_USERNAME        @"twitterUsername"
@@ -18,32 +14,46 @@
 
 - (id)defaultsGetObjectForKey:(NSString *)key;
 
-- (BOOL)engineIsAuthorized;
-
 - (void)defaultsClear;
 
 @end
 
 @implementation TwitterFacade {
+    NSString *_appConsumerKey;
+    NSString *_appConsumerSecret;
+
     SA_OAuthTwitterEngine *_engine;
-    ViewController *_controller;
-    TwitterControllerDelegate *_delegate;
 }
 
-- (id)initWithViewController:(ViewController *)viewController {
+@synthesize onEnterCredentials = _onEnterCredentials;
+@synthesize onSessionRestored = _onSessionRestored;
+@synthesize onLoggedIn = _onLoggedIn;
+@synthesize onLoginError = _onLoginError;
+@synthesize onLoginCanceled = _onLoginCanceled;
+@synthesize onLoggedOut = _onLoggedOut;
+
+
+- (id)initWithAppConsumerKey:(NSString *)appConsumerKey appConsumerSecret:(NSString *)appConsumerSecret {
     self = [super init];
     if (self) {
-        _controller = [viewController retain];
-        _delegate = [[TwitterControllerDelegate alloc] initWithController:viewController];
+        _appConsumerKey = [appConsumerKey copy];
+        _appConsumerSecret = [appConsumerSecret copy];
     }
 
     return self;
 }
 
 - (void)dealloc {
+    [_appConsumerKey release];
+    [_appConsumerSecret release];
     [_engine release];
-    [_delegate release];
-    [_controller release];
+
+    [_onEnterCredentials release];
+    [_onSessionRestored release];
+    [_onLoggedIn release];
+    [_onLoginError release];
+    [_onLoginCanceled release];
+    [_onLoggedOut release];
 
     [super dealloc];
 }
@@ -61,13 +71,9 @@
 }
 
 - (void)engineCreate {
-    _engine = [[SA_OAuthTwitterEngine alloc] initOAuthWithDelegate:_delegate];
-    _engine.consumerKey = TWITTER_APP_CONSUMER_KEY;
-    _engine.consumerSecret = TWITTER_APP_CONSUMER_SECRET;
-}
-
-- (BOOL)engineIsAuthorized {
-    return _engine && [_engine isAuthorized];
+    _engine = [[SA_OAuthTwitterEngine alloc] initOAuthWithDelegate:self];
+    _engine.consumerKey = _appConsumerKey;
+    _engine.consumerSecret = _appConsumerSecret;
 }
 
 - (void)engineClear {
@@ -79,29 +85,31 @@
     }
 }
 
+- (BOOL)isAuthorized {
+    return _engine && [_engine isAuthorized];
+}
+
 - (void)login {
     [self engineCreate];
-    if ([self engineIsAuthorized]) {
+    if ([self isAuthorized]) {
         return;
     }
 
-    UIViewController *controller = [SA_OAuthTwitterController controllerToEnterCredentialsWithTwitterEngine:_engine delegate:_delegate];
-    if (controller)
-        [_controller presentModalViewController:controller animated:YES];
-    else {
-        [_engine sendUpdate:[NSString stringWithFormat:@"Already Updated. %@", [NSDate date]]];
-    }
+    UIViewController *enterCredentialsController = [SA_OAuthTwitterController controllerToEnterCredentialsWithTwitterEngine:_engine delegate:self];
+    self.onEnterCredentials(enterCredentialsController);
 }
 
-- (void)restore {
+- (void)restoreSession {
     if (_engine) {
         return;
     }
 
     [self engineCreate];
-    if ([self engineIsAuthorized]) {
-        id username = [self defaultsGetObjectForKey:TWITTER_USERNAME];
-        [_engine getUserInformationFor:username];
+    if (![self isAuthorized]) {
+        LOG(@"Twitter session not found");
+    } else {
+        LOG(@"Twitter session restored for user %@", [self defaultsGetObjectForKey:TWITTER_USERNAME]);
+        self.onSessionRestored([self defaultsGetObjectForKey:TWITTER_USERNAME]);
     }
 }
 
@@ -109,7 +117,57 @@
     [self engineClear];
     [self defaultsClear];
 
-    [_controller twitterLogoutFinished];
+    LOG(@"Twitter logged out");
+
+    self.onLoggedOut();
+}
+
+
+- (void)requestSucceeded:(NSString *)connectionIdentifier {
+    LOG(@"Twitter request succeeded: %@", connectionIdentifier);
+
+}
+
+- (void)requestFailed:(NSString *)connectionIdentifier withError:(NSError *)error {
+    LOG(@"Twitter request failed: %@", error);
+}
+
+- (void)userInfoReceived:(NSArray *)userInfo forRequest:(NSString *)connectionIdentifier {
+    id userName = [[userInfo objectAtIndex:0] objectForKey:@"name"];
+    LOG(@"Twitter Name: %@", userName);
+};
+
+#pragma mark SA_OAuthTwitterControllerDelegate
+- (void)OAuthTwitterController:(SA_OAuthTwitterController *)controller authenticatedWithUsername:(NSString *)username {
+    LOG(@"Twitter logged in: %@", username);
+    self.onLoggedIn(username);
+}
+
+- (void)OAuthTwitterControllerFailed:(SA_OAuthTwitterController *)controller {
+    LOG(@"Twitter login error");
+
+    [self engineClear];
+    self.onLoginError();
+}
+
+- (void)OAuthTwitterControllerCanceled:(SA_OAuthTwitterController *)controller {
+    LOG(@"Twitter login canceled");
+
+    [self engineClear];
+    self.onLoginCanceled();
+}
+
+//called by SA_OAuthTwitterEngine
+- (void)storeCachedTwitterOAuthData:(NSString *)data forUsername:(NSString *)username {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:data forKey:TWITTER_AUTH_TOKEN];
+    [defaults setObject:username forKey:TWITTER_USERNAME];
+    [defaults synchronize];
+}
+
+//called by SA_OAuthTwitterEngine
+- (NSString *)cachedTwitterOAuthDataForUsername:(NSString *)username {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:TWITTER_AUTH_TOKEN];
 }
 
 @end

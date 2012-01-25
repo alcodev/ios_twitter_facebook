@@ -5,18 +5,31 @@
 
 
 #import <Foundation/Foundation.h>
+#import "MGTwitterEngineDelegate.h"
+#import "SA_OAuthTwitterController.h"
 
-@protocol MGTwitterEngineDelegate;
-@protocol SA_OAuthTwitterControllerDelegate;
 @class ViewController;
 
+typedef void(^TwitterEnterCredentialsCallback)(UIViewController *);
+typedef void(^TwitterUserCallback)(NSString *);
 
-@interface TwitterFacade : NSObject
-- (id)initWithViewController:(ViewController *)viewController;
+@interface TwitterFacade : NSObject<SA_OAuthTwitterControllerDelegate, MGTwitterEngineDelegate>
+
+@property(nonatomic, copy) TwitterEnterCredentialsCallback onEnterCredentials;
+@property(nonatomic, copy) TwitterUserCallback onSessionRestored;
+@property(nonatomic, copy) TwitterUserCallback onLoggedIn;
+@property(nonatomic, copy) Callback onLoginError;
+@property(nonatomic, copy) Callback onLoginCanceled;
+@property(nonatomic, copy) Callback onLoggedOut;
+
+
+- (id)initWithAppConsumerKey:(NSString *)appConsumerKey appConsumerSecret:(NSString *)appConsumerSecret;
+
+- (BOOL)isAuthorized;
 
 - (void)login;
 
-- (void)restore;
+- (void)restoreSession;
 
 - (void)logout;
 

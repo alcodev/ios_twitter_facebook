@@ -12,10 +12,10 @@
 #import "TwitterFacade.h"
 
 @interface ViewController ()
+
 - (void)onFacebookLoggedIn;
 
 - (void)onFacebookLoggedOut;
-
 
 @end
 
@@ -29,7 +29,33 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _twitterFacade = [[TwitterFacade alloc] initWithViewController:self];
+        _twitterFacade = [[TwitterFacade alloc] initWithAppConsumerKey:TWITTER_APP_CONSUMER_KEY appConsumerSecret:TWITTER_APP_CONSUMER_SECRET];
+        _twitterFacade.onEnterCredentials = ^(UIViewController *enterCredentialsController) {
+            [self presentModalViewController:enterCredentialsController animated:YES];
+        };
+        _twitterFacade.onSessionRestored = ^(NSString *username) {
+            [twitterLoginButton setEnabled:NO];
+            [twitterLogoutButton setEnabled:YES];
+            [self showTwitterUsername:username];
+        };
+        _twitterFacade.onLoggedIn = ^(NSString *username) {
+            //[[controller engine] getUserInformationFor:username];
+            [twitterLoginButton setEnabled:NO];
+            [twitterLogoutButton setEnabled:YES];
+            [self showTwitterUsername:username];
+        };
+        _twitterFacade.onLoginError = ^() {
+            [self showTwitterUsername:@"Error"];
+        };
+        _twitterFacade.onLoginCanceled = ^() {
+            [self showTwitterUsername:@"Canceled"];
+        };
+        _twitterFacade.onLoggedOut = ^() {
+            [twitterLoginButton setEnabled:YES];
+            [twitterLogoutButton setEnabled:NO];
+            [self showTwitterUsername:@""];
+        };
+
         _facebookFacade = [[FacebookFacade alloc] initWithAppId:FACEBOOK_APP_ID];
         _facebookFacade.onSessionInvalidated = ^{
             LOG(@"Facebook session invalidated");
@@ -76,23 +102,15 @@
     [super viewWillAppear:animated];
 
     [_facebookFacade restoreSession];
-    [_twitterFacade restore];
+    [_twitterFacade restoreSession];
 }
 
 - (IBAction)facebookLoginButtonClicked:(id)sender {
-    [facebookLoginButton setEnabled:NO];
-    [facebookLogoutButton setEnabled:NO];
-    [twitterLoginButton setEnabled:NO];
-    [twitterLogoutButton setEnabled:NO];
-
      [_facebookFacade loginAndDoOnSuccess:^{
          LOG(@"Facebook login success");
          [self onFacebookLoggedIn];
      } onError:^{
-         LOG(@"Facebook login error");
-         [facebookNotificationTextLabel setText:@"Invalid user or password"];
-         [facebookLoginButton setEnabled:YES];
-         [facebookLogoutButton setEnabled:NO];
+        //handle error
      }];
 }
 
@@ -106,6 +124,7 @@
 -(void)onFacebookLoggedIn {
     [facebookLoginButton setEnabled:NO];
     [facebookLogoutButton setEnabled:YES];
+
     [_facebookFacade requestWithGraphPath:@"me" onSuccess:^(id result){
         LOG(@"Facebook graph api request success");
         if ([result isKindOfClass:[NSArray class]]) {
@@ -129,8 +148,6 @@
     [facebookLogoutButton setEnabled:NO];
 }
 
-
-
 - (IBAction)twitterLoginButtonClicked:(id)sender {
     [_twitterFacade login];
 }
@@ -139,28 +156,8 @@
     [_twitterFacade logout];
 }
 
-- (void)twitterLogoutFinished {
-    [twitterNotificationTextLabel setText:@""];
-    [twitterLoginButton setEnabled:YES];
-    [twitterLogoutButton setEnabled:NO];
-}
-
 - (void)showTwitterUsername:(NSString *)username {
     [twitterNotificationTextLabel setText:username];
-    [twitterLoginButton setEnabled:NO];
-    [twitterLogoutButton setEnabled:YES];
-}
-
-- (void)showTwitterAuthenticationFailed {
-    [twitterNotificationTextLabel setText:@"Twitter authentication failed"];
-    [twitterLoginButton setEnabled:YES];
-    [twitterLogoutButton setEnabled:NO];
-}
-
-- (void)showTwitterAuthenticationCanceled {
-    [twitterNotificationTextLabel setText:@"Twitter authentication canceled"];
-    [twitterLoginButton setEnabled:YES];
-    [twitterLogoutButton setEnabled:NO];
 }
 
 @end

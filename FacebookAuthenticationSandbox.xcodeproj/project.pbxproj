@@ -70,7 +70,6 @@
 		5279CB1C14C4743B00814835 /* OAServiceTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B00814834 /* OAServiceTicket.m */; };
 		5279CB1C14C4743B00814839 /* OAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B00814838 /* OAToken.m */; };
 		5279CB1C14C4743B00814840 /* TwitterFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B0081483F /* TwitterFacade.m */; };
-		5279CB1C14C4743B00814843 /* TwitterControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B00814842 /* TwitterControllerDelegate.m */; };
 		5279CB1C14C4743B00814848 /* FacebookControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B00814847 /* FacebookControllerDelegate.m */; };
 		5279CB1C14C4743B0081484B /* FacebookResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279CB1C14C4743B0081484A /* FacebookResponseDelegate.m */; };
 /* End PBXBuildFile section */
@@ -222,8 +221,6 @@
 		5279CB1C14C4743B0081483D /* OAuthConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthConsumer.h; sourceTree = "<group>"; };
 		5279CB1C14C4743B0081483F /* TwitterFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFacade.m; sourceTree = "<group>"; };
 		5279CB1C14C4743B00814841 /* TwitterFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterFacade.h; sourceTree = "<group>"; };
-		5279CB1C14C4743B00814842 /* TwitterControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterControllerDelegate.m; sourceTree = "<group>"; };
-		5279CB1C14C4743B00814844 /* TwitterControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterControllerDelegate.h; sourceTree = "<group>"; };
 		5279CB1C14C4743B00814847 /* FacebookControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookControllerDelegate.m; sourceTree = "<group>"; };
 		5279CB1C14C4743B00814849 /* FacebookControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookControllerDelegate.h; sourceTree = "<group>"; };
 		5279CB1C14C4743B0081484A /* FacebookResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookResponseDelegate.m; sourceTree = "<group>"; };
@@ -548,8 +545,6 @@
 		5279CB1C14C4743B0081483E /* TwitterFacade */ = {
 			isa = PBXGroup;
 			children = (
-				5279CB1C14C4743B00814844 /* TwitterControllerDelegate.h */,
-				5279CB1C14C4743B00814842 /* TwitterControllerDelegate.m */,
 				5279CB1C14C4743B00814841 /* TwitterFacade.h */,
 				5279CB1C14C4743B0081483F /* TwitterFacade.m */,
 			);
@@ -713,7 +708,6 @@
 				5279CB1C14C4743B00814835 /* OAServiceTicket.m in Sources */,
 				5279CB1C14C4743B00814839 /* OAToken.m in Sources */,
 				5279CB1C14C4743B00814840 /* TwitterFacade.m in Sources */,
-				5279CB1C14C4743B00814843 /* TwitterControllerDelegate.m in Sources */,
 				5279CB1C14C4743B00814848 /* FacebookControllerDelegate.m in Sources */,
 				5279CB1C14C4743B0081484B /* FacebookResponseDelegate.m in Sources */,
 			);
