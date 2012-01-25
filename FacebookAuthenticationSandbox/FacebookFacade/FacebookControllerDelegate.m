@@ -11,26 +11,41 @@
 @implementation FacebookControllerDelegate {
     ViewController *_viewController;
 }
+
+- (FacebookControllerDelegate *)initWithController:(ViewController *)controller {
+    self = [super init];
+    if (self) {
+        _viewController = [controller retain];
+    }
+    return (self);
+
+}
+
+- (void)dealloc {
+    [_viewController release];
+    [super dealloc];
+}
+
 - (void)fbDidLogin {
     LOG(@"Facebook user did login");
-    [_viewController onFacebookLoginSuccess];
+    //[_viewController onFacebookLoginSuccess];
 
 }
 
 - (void)fbDidNotLogin:(BOOL)cancelled {
     LOG(@"Facebook user did NOT login");
-    [_viewController onFacebookLoginFailed];
+    //[_viewController onFacebookLoginFailed];
 
 }
 
 - (void)fbDidLogout {
     LOG(@"Facebook user logout");
-    [_viewController onFacebookLogout];
+    //[_viewController onFacebookLogout];
 }
 
 - (void)fbSessionInvalidated {
     LOG(@"Facebook session invalidated");
-    [_viewController onFacebookSessionInvalidated];
+    //[_viewController onFacebookSessionInvalidated];
 
 }
 
@@ -49,17 +64,4 @@
     }
 }
 
-- (FacebookControllerDelegate *)initWithController:(ViewController *)controller {
-    self = [super init];
-    if (self) {
-        _viewController = [controller retain];
-    }
-    return (self);
-
-}
-
-- (void)dealloc {
-    [_viewController release];
-    [super dealloc];
-}
 @end

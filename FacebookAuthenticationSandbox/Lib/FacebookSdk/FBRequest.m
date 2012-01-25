@@ -319,6 +319,7 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
  * Free internal structure
  */
 - (void)dealloc {
+  [_delegate release];
   [_connection cancel];
   [_connection release];
   [_responseText release];

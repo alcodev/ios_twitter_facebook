@@ -40,13 +40,5 @@
 
 - (void)showTwitterAuthenticationCanceled;
 
-- (void)onFacebookLoginSuccess;
-
-- (void)onFacebookLoginFailed;
-
-- (void)onFacebookLogout;
-
-- (void)onFacebookSessionInvalidated;
-
 - (void)showFacebookUsername:(NSString *)username;
 @end
