@@ -10,8 +10,6 @@
 #import "FacebookFacade.h"
 #import "Consts.h"
 #import "TwitterFacade.h"
-#import "DefaultsKeys.h"
-#import "FacebookControllerDelegate.h"
 
 @interface ViewController ()
 - (void)onFacebookLoggedIn;
@@ -77,12 +75,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:FACEBOOK_AUTH_TOKEN] && [defaults objectForKey:FACEBOOK_EXPIRATION_DATE_KEY]) {
-        [_facebookFacade facebook].accessToken = [defaults objectForKey:FACEBOOK_AUTH_TOKEN];
-        [_facebookFacade facebook].expirationDate = [defaults objectForKey:FACEBOOK_EXPIRATION_DATE_KEY];
-    }
-
     [_facebookFacade restoreSession];
     [_twitterFacade restore];
 }
@@ -112,11 +104,6 @@
 }
 
 -(void)onFacebookLoggedIn {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[[_facebookFacade facebook] accessToken] forKey:FACEBOOK_AUTH_TOKEN];
-    [defaults setObject:[[_facebookFacade facebook] expirationDate] forKey:FACEBOOK_EXPIRATION_DATE_KEY];
-    [defaults synchronize];
-
     [facebookLoginButton setEnabled:NO];
     [facebookLogoutButton setEnabled:YES];
     [_facebookFacade requestWithGraphPath:@"me" onSuccess:^(id result){
@@ -137,11 +124,6 @@
 }
 
 -(void)onFacebookLoggedOut {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:FACEBOOK_AUTH_TOKEN];
-    [defaults removeObjectForKey:FACEBOOK_EXPIRATION_DATE_KEY];
-    [defaults synchronize];
-
     [facebookNotificationTextLabel setText:@""];
     [facebookLoginButton setEnabled:YES];
     [facebookLogoutButton setEnabled:NO];

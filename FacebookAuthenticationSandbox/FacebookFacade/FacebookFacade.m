@@ -6,11 +6,20 @@
 
 #import "FacebookFacade.h"
 
+#define FACEBOOK_AUTH_TOKEN             @"FBAccessTokenKey"
+#define FACEBOOK_EXPIRATION_DATE_KEY    @"FBExpirationDateKey"
+
 @interface FacebookFacade()
 
 @property(nonatomic, copy) Callback onLoginSuccess;
 @property(nonatomic, copy) Callback onLoginError;
 @property(nonatomic, copy) Callback onLogoutSuccess;
+
+- (void)defaultsLoad;
+
+- (void)defaultsUpdate;
+
+- (void)defaultsClear;
 
 @end
 
@@ -32,6 +41,8 @@
     if (self) {
         _permissions = [[NSArray alloc] initWithObjects:@"offline_access", @"user_about_me", nil];
         _facebook = [[Facebook alloc] initWithAppId:appId andDelegate:self];
+
+        [self defaultsLoad];
     }
 
     return self;
@@ -48,6 +59,28 @@
     [_onLogoutSuccess release];
 
     [super dealloc];
+}
+
+- (void)defaultsLoad {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:FACEBOOK_AUTH_TOKEN] && [defaults objectForKey:FACEBOOK_EXPIRATION_DATE_KEY]) {
+        _facebook.accessToken = [defaults objectForKey:FACEBOOK_AUTH_TOKEN];
+        _facebook.expirationDate = [defaults objectForKey:FACEBOOK_EXPIRATION_DATE_KEY];
+    }
+}
+
+- (void)defaultsUpdate {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:_facebook.accessToken forKey:FACEBOOK_AUTH_TOKEN];
+    [defaults setObject:_facebook.expirationDate forKey:FACEBOOK_EXPIRATION_DATE_KEY];
+    [defaults synchronize];
+}
+
+- (void)defaultsClear {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:FACEBOOK_AUTH_TOKEN];
+    [defaults removeObjectForKey:FACEBOOK_EXPIRATION_DATE_KEY];
+    [defaults synchronize];
 }
 
 - (void)loginAndDoOnSuccess:(Callback)onSuccess onError:(Callback)onError {
@@ -78,6 +111,7 @@
 
 - (void)fbDidLogin {
     LOG(@"Facebook user did login");
+    [self defaultsUpdate];
     self.onLoginSuccess();
 }
 
@@ -88,6 +122,7 @@
 
 - (void)fbDidLogout {
     LOG(@"Facebook user logout");
+    [self defaultsClear];
     self.onLogoutSuccess();
 }
 
