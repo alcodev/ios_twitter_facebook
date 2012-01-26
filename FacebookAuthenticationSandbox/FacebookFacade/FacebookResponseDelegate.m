@@ -22,14 +22,16 @@
 }
 
 - (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
-    LOG(@"Facebook response was received. URL @", [response URL]);
+    LOG(@"Facebook graph api response received: %@", [response URL]);
 }
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
+    LOG(@"Facebook graph api request success");
     _onSuccess(result);
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    LOG(@"Facebook graph api request error: %@", error.description);
     _onError(error);
 }
 

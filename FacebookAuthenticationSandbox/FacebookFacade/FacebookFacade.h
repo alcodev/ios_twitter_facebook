@@ -11,8 +11,6 @@
 
 @class Facebook;
 
-typedef void(^FacebookCallback)(id result);
-
 @interface FacebookFacade : NSObject<FBSessionDelegate, FBRequestDelegate> {
     Facebook *_facebook;
 }
@@ -20,13 +18,16 @@ typedef void(^FacebookCallback)(id result);
 @property(nonatomic, readonly) Facebook *facebook;
 @property(nonatomic, copy) Callback onSessionRestored;
 @property(nonatomic, copy) Callback onSessionInvalidated;
+@property(nonatomic, copy) Callback onLoginSuccess;
+@property(nonatomic, copy) Callback onLoginError;
+@property(nonatomic, copy) Callback onLogoutSuccess;
 
 
 - (id)initWithAppId:(NSString *)appId;
 
-- (void)loginAndDoOnSuccess:(Callback)onSuccess onError:(Callback)onError;
+- (void)login;
 
-- (void)logoutAndDoOnSuccess:(Callback)onSuccess;
+- (void)logout;
 
 - (void)restoreSession;
 

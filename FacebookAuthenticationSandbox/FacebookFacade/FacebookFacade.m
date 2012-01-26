@@ -11,10 +11,6 @@
 
 @interface FacebookFacade()
 
-@property(nonatomic, copy) Callback onLoginSuccess;
-@property(nonatomic, copy) Callback onLoginError;
-@property(nonatomic, copy) Callback onLogoutSuccess;
-
 - (void)defaultsLoad;
 
 - (void)defaultsUpdate;
@@ -83,10 +79,7 @@
     [defaults synchronize];
 }
 
-- (void)loginAndDoOnSuccess:(Callback)onSuccess onError:(Callback)onError {
-    self.onLoginSuccess = onSuccess;
-    self.onLoginError = onError;
-
+- (void)login {
     if ([_facebook isSessionValid]) {
         self.onLoginSuccess();
     } else {
@@ -94,34 +87,32 @@
     }
 }
 
-- (void)logoutAndDoOnSuccess:(Callback)onSuccess {
-    self.onLogoutSuccess = onSuccess;
-
+- (void)logout {
    [_facebook logout];
 }
 
 - (void)restoreSession {
     if ([_facebook isSessionValid]) {
-        LOG(@"User is authenticated. Restore the session");
+        LOG(@"Facebook session restored");
         self.onSessionRestored();
     } else{
-        LOG(@"User not authenticated");
+        LOG(@"Facebook session not found");
     }
 }
 
 - (void)fbDidLogin {
-    LOG(@"Facebook user did login");
+    LOG(@"Facebook logged in");
     [self defaultsUpdate];
     self.onLoginSuccess();
 }
 
 - (void)fbDidNotLogin:(BOOL)cancelled {
-    LOG(@"Facebook user did NOT login");
+    LOG(@"Facebook login error");
     self.onLoginError();
 }
 
 - (void)fbDidLogout {
-    LOG(@"Facebook user logout");
+    LOG(@"Facebook logged out");
     [self defaultsClear];
     self.onLogoutSuccess();
 }

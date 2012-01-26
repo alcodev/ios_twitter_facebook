@@ -36,36 +36,43 @@
         _twitterFacade.onSessionRestored = ^(NSString *username) {
             [twitterLoginButton setEnabled:NO];
             [twitterLogoutButton setEnabled:YES];
-            [self showTwitterUsername:username];
+            [self showTwitterResult:username];
         };
         _twitterFacade.onLoggedIn = ^(NSString *username) {
             //[[controller engine] getUserInformationFor:username];
             [twitterLoginButton setEnabled:NO];
             [twitterLogoutButton setEnabled:YES];
-            [self showTwitterUsername:username];
+            [self showTwitterResult:username];
         };
         _twitterFacade.onLoginError = ^() {
-            [self showTwitterUsername:@"Error"];
+            [self showTwitterResult:@"Error"];
         };
         _twitterFacade.onLoginCanceled = ^() {
-            [self showTwitterUsername:@"Canceled"];
+            [self showTwitterResult:@"Canceled"];
         };
         _twitterFacade.onLoggedOut = ^() {
             [twitterLoginButton setEnabled:YES];
             [twitterLogoutButton setEnabled:NO];
-            [self showTwitterUsername:@""];
+            [self showTwitterResult:@""];
         };
 
         _facebookFacade = [[FacebookFacade alloc] initWithAppId:FACEBOOK_APP_ID];
         _facebookFacade.onSessionInvalidated = ^{
-            LOG(@"Facebook session invalidated");
-            [facebookNotificationTextLabel setText:@"Session invalidated"];
+            [self showFacebookResult:@"Session invalidated"];
             [facebookLoginButton setEnabled:YES];
             [facebookLogoutButton setEnabled:NO];
         };
         _facebookFacade.onSessionRestored = ^{
-            LOG(@"Facebook session restored");
             [self onFacebookLoggedIn];
+        };
+        _facebookFacade.onLoginSuccess = ^{
+            [self onFacebookLoggedIn];
+        };
+        _facebookFacade.onLoginError = ^{
+            [self showFacebookResult:@"Error"];
+        };
+        _facebookFacade.onLogoutSuccess = ^{
+            [self onFacebookLoggedOut];
         };
     }
 
@@ -91,8 +98,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [facebookNotificationTextLabel setText:@""];
-    [twitterNotificationTextLabel setText:@""];
+    [self showFacebookResult:@""];
+    [self showTwitterResult:@""];
 
     [facebookLogoutButton setEnabled:NO];
     [twitterLogoutButton setEnabled:NO];
@@ -106,46 +113,11 @@
 }
 
 - (IBAction)facebookLoginButtonClicked:(id)sender {
-     [_facebookFacade loginAndDoOnSuccess:^{
-         LOG(@"Facebook login success");
-         [self onFacebookLoggedIn];
-     } onError:^{
-        //handle error
-     }];
+    [_facebookFacade login];
 }
 
 - (IBAction)facebookLogoutButtonClicked:(id)sender {
-    [_facebookFacade logoutAndDoOnSuccess:^{
-        LOG(@"Facebook logout success");
-        [self onFacebookLoggedOut];
-    }];
-}
-
--(void)onFacebookLoggedIn {
-    [facebookLoginButton setEnabled:NO];
-    [facebookLogoutButton setEnabled:YES];
-
-    [_facebookFacade requestWithGraphPath:@"me" onSuccess:^(id result){
-        LOG(@"Facebook graph api request success");
-        if ([result isKindOfClass:[NSArray class]]) {
-            LOG(@"Received Facebook result is array");
-            result = [result objectAtIndex:0];
-        }
-
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            id fullName = [result objectForKey:@"name"];
-            [facebookNotificationTextLabel setText:fullName];
-            LOG(@"Received Facebook full name: %@", fullName);
-        }
-    } onError:^(NSError *error){
-        LOG(@"Facebook graph api request error: %@", error.description);
-    }];
-}
-
--(void)onFacebookLoggedOut {
-    [facebookNotificationTextLabel setText:@""];
-    [facebookLoginButton setEnabled:YES];
-    [facebookLogoutButton setEnabled:NO];
+    [_facebookFacade logout];
 }
 
 - (IBAction)twitterLoginButtonClicked:(id)sender {
@@ -156,8 +128,38 @@
     [_twitterFacade logout];
 }
 
-- (void)showTwitterUsername:(NSString *)username {
-    [twitterNotificationTextLabel setText:username];
+- (void)showFacebookResult:(NSString *)text {
+    [facebookNotificationTextLabel setText:text];
+}
+
+- (void)showTwitterResult:(NSString *)text {
+    [twitterNotificationTextLabel setText:text];
+}
+
+-(void)onFacebookLoggedIn {
+    [facebookLoginButton setEnabled:NO];
+    [facebookLogoutButton setEnabled:YES];
+
+    [_facebookFacade requestWithGraphPath:@"me" onSuccess:^(id result){
+        if ([result isKindOfClass:[NSArray class]]) {
+            LOG(@"Facebook result is array");
+            result = [result objectAtIndex:0];
+        }
+
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            id fullName = [result objectForKey:@"name"];
+            [self showFacebookResult:fullName];
+            LOG(@"Facebook full name: %@", fullName);
+        }
+    } onError:^(NSError *error){
+        //handle error
+    }];
+}
+
+-(void)onFacebookLoggedOut {
+    [self showFacebookResult:@""];
+    [facebookLoginButton setEnabled:YES];
+    [facebookLogoutButton setEnabled:NO];
 }
 
 @end

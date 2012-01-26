@@ -32,13 +32,7 @@
 - (IBAction)twitterLogoutButtonClicked:(id)sender;
 
 
-- (void)twitterLogoutFinished;
+- (void)showTwitterResult:(NSString *)text;
 
-- (void)showTwitterUsername:(NSString *)username;
-
-- (void)showTwitterAuthenticationFailed;
-
-- (void)showTwitterAuthenticationCanceled;
-
-- (void)showFacebookUsername:(NSString *)username;
+- (void)showFacebookResult:(NSString *)text;
 @end
